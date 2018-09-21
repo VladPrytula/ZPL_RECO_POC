@@ -4,7 +4,7 @@ from .models import PetOwner, Pet, Product
 
 # Create your views here.
 
-class OwnerListView(ListView):
+class PetOwnerListView(ListView):
     model = PetOwner
 
 class OwnerDetailView(DetailView):
