@@ -4,13 +4,16 @@ from .models import PetOwner, Pet, Product
 
 # Create your views here.
 
+
 class PetOwnerListView(ListView):
+    context_object_name = 'owners'
     model = PetOwner
+
 
 class OwnerDetailView(DetailView):
+    contexte_object_name = 'owner_detail'
     model = PetOwner
     template_name = 'basic_app/owner_detail.html'
-
 
 
 """ def index(request):
@@ -22,10 +25,10 @@ class OwnerDetailView(DetailView):
  """
 
 
-""" class IndexView(TemplateView):
+class IndexView(TemplateView):
     template_name = 'index.html'
 
-
+"""  
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['injected'] = 'BASIC INJECTION'
