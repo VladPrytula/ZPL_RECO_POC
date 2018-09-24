@@ -5,6 +5,11 @@
     <h1>Welcome to the onwer detail page</h1>
     <h2> Owner Details</h2>
     <p>Name: {{owner_detail.name}}</p>
-    <p>Pet: {{owner_detail.pet}}</p>
+    <h3>Pets</h3>
+
+    {% for pet in owner_detail.pets.all %}
+        <p>{{pet.name}} who is {{pet.age}} years old</p>
+    {% endfor %}
+
 </div>
 {% endblock body_block %}

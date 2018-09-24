@@ -5,7 +5,7 @@
 <h1>Welcome to a list of the Pet Onwers</h1>
     <ol>
         {% for owner in owners  %}
-            <h2><li>{{owner.name}}</li></h2>
+            <h2><li><a href="{{owner.id}}">{{owner.name}}</a></li></h2>
         {% endfor %}
     </ol>
 

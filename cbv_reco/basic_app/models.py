@@ -5,8 +5,7 @@ from django.db import models
 
 class PetOwner(models.Model):
     name = models.CharField(max_length=256)
-    pet = models.CharField(max_length=256)  # this shoudl be updted
-
+    
     def __str__(self):
         return self.name
 
