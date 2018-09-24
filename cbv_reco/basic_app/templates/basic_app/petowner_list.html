@@ -3,10 +3,39 @@
 {% block body_block %}
 
 <h1>Welcome to a list of the Pet Onwers</h1>
-    <ol>
-        {% for owner in owners  %}
-            <h2><li><a href="{{owner.id}}">{{owner.name}}</a></li></h2>
-        {% endfor %}
-    </ol>
+{% comment %} <ol>
+    {% for owner in owners %}
+    <h2>
+        <li><a href="{{owner.id}}">{{owner.name}}</a></li>
+    </h2>
+    {% endfor %}
+</ol>
+ {% endcomment %}
+
+<div class="jumbotron">
+    <h2>Click on the Owner to see details and recommendations</h2>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Owner Name</th>
+                <th>Pets</th>
+                <th>Purchase History</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for owner in owners %}
+            <tr>
+                <td><a href="{{owner.id}}">{{owner.name}}</a></td>
+                <td>
+                    {% for pet in owner.pets.all %}
+                        <p>{{pet.name}} who is {{pet.age}} years old</p>
+                    {% endfor %}
+                </td>
+                <td>none</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock body_block %}
