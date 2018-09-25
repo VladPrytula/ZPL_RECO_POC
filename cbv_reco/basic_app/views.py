@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, ListView, DetailView
+from django.core.paginator import Paginator
+
 from .models import PetOwner, Pet, Product
 
 # Create your views here.
@@ -8,6 +10,8 @@ from .models import PetOwner, Pet, Product
 class PetOwnerListView(ListView):
     context_object_name = 'owners'
     model = PetOwner
+    paginate_by = 10
+    queryset = PetOwner.objects.all()
 
 
 class PetOwnerDetailView(DetailView):
