@@ -40,6 +40,13 @@ def read_user_data(file):
     return grouped_purchased
 
 
+def read_image_urls(file):
+    image_urls = pd.read_csv(file, sep=',', encoding='utf-8')
+    print("First three rows of the data IMG_URLS data frame:")
+    print(image_urls.iloc[:3])
+    return image_urls
+
+
 def read_item_lookup(file):
     item_lookup = pd.read_csv(file, sep='\t', encoding='utf-8')
     print("First three rows of the data frame:")
@@ -86,16 +93,22 @@ def populate_users(grouped_purchased, customers_arr):
         owner.products.add(*bought_products_qset)
 
 
-def populate_products(products_arr, item_lookup):
+def populate_products(products_arr, item_lookup, image_urls):
     Product.objects.all().delete()
 
     for idx, x in np.ndenumerate(products_arr):
         description = item_lookup[item_lookup['ART_C_PROD_NUMBER'] == x.astype(
             int)].iloc[0]['ART_V_ART_DESCRIPTION']
 
+        try:
+            img_url = image_urls[image_urls['PS_SHOP_IDENTIFIER']
+                             == x.astype(int)]['img_url'].iloc[0]
+        except (Exception):
+             print("This is an error message!")
+        
         product = Product(name=x.astype(str), art_c_prod_nubmer=x.astype(
-            int), lookup_product_idx=idx[0])
-        product.save()  # it should be unique...
+            int), lookup_product_idx=idx[0], art_v_art_description=description, image_url=img_url)
+        product.save()  # it should be unique... TODO reconsider PK
 
 
 if __name__ == "__main__":
@@ -109,13 +122,18 @@ if __name__ == "__main__":
     products_arr_file = "data/products_arr.csv"
     item_lookup_file = "data/item_lookup.csv"
     grouped_purchased_file = "data/grouped_purchased.csv"
+    image_urls_file = "data/image_urls.csv"
 
     customers_arr = read_customers_array(customers_arr_file)
     products_arr = read_products_array(products_arr_file)
+    image_urls = read_image_urls(image_urls_file)
 
     item_lookup = read_item_lookup(item_lookup_file)
     grouped_purchased = read_user_data(grouped_purchased_file)
-    populate_products(products_arr=products_arr, item_lookup=item_lookup)
+    print(image_urls.columns)
+    print(image_urls.dtypes)
+    populate_products(products_arr=products_arr,
+                      item_lookup=item_lookup, image_urls=image_urls)
     populate_users(grouped_purchased=grouped_purchased,
                    customers_arr=customers_arr)
 
