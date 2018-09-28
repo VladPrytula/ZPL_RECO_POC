@@ -2,18 +2,63 @@
 
 {% block body_block %}
 <div class="jumbotron">
+
     <h1>Welcome to the onwer detail page</h1>
     <h2> Owner Details</h2>
     <p>Name: {{owner_detail.name}}</p>
-    
-    <h3>Purchase history</h3>
 
-    {% for product in owner_detail.products.all %}
-    <p>{{product.image_url}} and details  {{product.art_v_art_description}}</p>
-    {% endfor %}
+    <h3>Purchase history</h3>
+    <div class="table-responsive">
+        <table class="table-responsive">
+            <tr>
+                {% for product in owner_detail.products.all %}
+                <th>
+                    <table>
+                        <tr>
+                            <td><img src="{{product.image_url}}" alt=""></td>
+                            <td> <span class="small"> Details: {{product.art_v_art_description}}</span></td>
+                        </tr>
+                    </table>
+
+                </th>
+
+                {# if the the forloop counter is divisible by 4, close the <li> tag and open a new one #}
+                    {% if forloop.counter|divisibleby:4 %}
+            </tr>
+            <tr>
+                {% endif %}
+
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+
+
+    <h3>Recommendations</h3>
+    <div class="table-responsive">
+        <table class="table-responsive">
+            <tr>
+                {% for reco in recommended_products %}
+                <th>
+                    <table>
+                        <tr>
+                            <td><img src="{{reco.image_url}}" alt=""></td>
+                            <td> <span class="small"> Details: {{reco}}</span></td>
+                        </tr>
+                    </table>
+
+                </th>
+
+                {# if the the forloop counter is divisible by 4, close the <li> tag and open a new one #}
+                    {% if forloop.counter|divisibleby:4 %}
+            </tr>
+            <tr>
+                {% endif %}
+
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
 
 </div>
-
-
-
 {% endblock body_block %}
