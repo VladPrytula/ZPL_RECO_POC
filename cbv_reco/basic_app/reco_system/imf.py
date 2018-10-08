@@ -24,12 +24,12 @@ class ImplicitRecommender():
         print('model loaded {}'.format(self.loaded_model))
 
     def recommend(self, user_id):
-        print('insde the recommend')
-        print(user_id)
+        #print('insde the recommend')
+        #print(user_id)
 
         recommendations = self.loaded_model.recommend(
             user_id, ImplicitRecommender.user_items, N=ImplicitRecommender.dimentions)
-        print(recommendations)
+        #print(recommendations)
         fast_recommended = []
 
         for index in recommendations:

@@ -1,64 +1,113 @@
 {% extends "basic_app/basic_app_base.html" %}
 
 {% block body_block %}
+
+<style>
+    .jumbotron-style {
+        posistion: relative;
+        z-index: 2;
+        box-shadow: 0 8px 16px -6px black;
+        background-color: whitesmoke;
+    }
+
+    img {
+        border-radius: 20%;
+        box-shadow: 2px 2px 1px #e6edea;
+    }
+
+    .sidenav {
+        height: 100%;
+        /* Full-height: remove this if you want "auto" height */
+        width: 160px;
+        /* Set the width of the sidebar */
+        position: fixed;
+        /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1;
+        /* Stay on top */
+        top: 0;
+        /* Stay at the top */
+        left: 0;
+        background-color: whitesmoke;
+        /* Black */
+        overflow-x: hidden;
+        /* Disable horizontal scroll */
+        padding-top: 200px;
+    }
+</style>
+
+
+
+<div class="sidenav">
+
+        <ul>
+            <li>CLV for Upselleing</li>
+            <li>Behavioural Features </li>
+            <li>Churn Factor</li>
+            <li>Pet Profile</li>
+            <li>Bidding</li>
+
+    
+</div>
+
 <div class="jumbotron">
 
-    <h1>Welcome to the onwer detail page</h1>
-    <h2> Owner Details</h2>
+    <h2>Customer History and Recommendations</h2>
     <p>Name: {{owner_detail.name}}</p>
 
-    <h3>Purchase history</h3>
-    <div class="table-responsive">
-        <table class="table-responsive">
-            <tr>
-                {% for product in owner_detail.products.all %}
-                <th>
-                    <table>
-                        <tr>
-                            <td><img src="{{product.image_url}}" alt=""></td>
-                            <td> <span class="small"> Details: {{product.art_v_art_description}}</span></td>
-                        </tr>
-                    </table>
+    <div class="jumbotron jumbotron-style">
+        <h3>Purchase history</h3>
+        <div class="table-responsive">
+            <table class="table-responsive">
+                <tr>
+                    {% for product in owner_detail.products.all %}
+                    <th>
+                        <table>
+                            <tr>
+                                <td><img src="{{product.image_url}}" alt=""></td>
+                                <td> <span class="small"> Details: {{product.art_v_art_description}}</span></td>
+                            </tr>
+                        </table>
 
-                </th>
+                    </th>
 
-                {# if the the forloop counter is divisible by 4, close the <li> tag and open a new one #}
-                    {% if forloop.counter|divisibleby:4 %}
-            </tr>
-            <tr>
-                {% endif %}
+                    {# if the the forloop counter is divisible by 4, close the <li> tag and open a new one #}
+                        {% if forloop.counter|divisibleby:4 %}
+                </tr>
+                <tr>
+                    {% endif %}
 
-                {% endfor %}
-            </tr>
-        </table>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
     </div>
 
+    <div class="jumbotron jumbotron-style">
+        <h3>Recommendations</h3>
+        <div class="table-responsive">
+            <table class="table-responsive">
+                <tr>
+                    {% for reco in recommended_products %}
+                    <th>
+                        <table>
+                            <tr>
+                                <td><img src="{{reco.image_url}}" alt=""></td>
+                                <td> <span class="small"> Details: {{reco}}</span></td>
+                            </tr>
+                        </table>
 
-    <h3>Recommendations</h3>
-    <div class="table-responsive">
-        <table class="table-responsive">
-            <tr>
-                {% for reco in recommended_products %}
-                <th>
-                    <table>
-                        <tr>
-                            <td><img src="{{reco.image_url}}" alt=""></td>
-                            <td> <span class="small"> Details: {{reco}}</span></td>
-                        </tr>
-                    </table>
+                    </th>
 
-                </th>
+                    {# if the the forloop counter is divisible by 4, close the <li> tag and open a new one #}
+                        {% if forloop.counter|divisibleby:4 %}
+                </tr>
+                <tr>
+                    {% endif %}
 
-                {# if the the forloop counter is divisible by 4, close the <li> tag and open a new one #}
-                    {% if forloop.counter|divisibleby:4 %}
-            </tr>
-            <tr>
-                {% endif %}
-
-                {% endfor %}
-            </tr>
-        </table>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
     </div>
-
 </div>
 {% endblock body_block %}

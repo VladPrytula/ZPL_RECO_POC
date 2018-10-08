@@ -297,8 +297,8 @@
              * Returns a json-like object.
              */
             function genData() {
-                var type = ['Replenish', 'Remind', 'Top Sellers'];
-                var unit = ['Imp', 'Revenue', 'Other Metric'];
+                var type = ['Replenish', 'Reminding', 'Cross Selling', 'Top Sellers'];
+                var unit = [' Impressions', ' Revenue', ' CM2' , ' Revenue'];
                 var cat = ['Home 1', 'Category', 'SubCategory', 'Product', 'Cart'];
 
                 var dataset = new Array();
@@ -308,7 +308,7 @@
                     var total = 0;
 
                     for (var j = 0; j < cat.length; j++) {
-                        var value = Math.random() * 10 * (3 - i);
+                        var value = Math.random() * 10 * (4 - i);
                         total += value;
                         data.push({
                             "cat": cat[j],
